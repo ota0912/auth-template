@@ -10,25 +10,21 @@ import corsOptions from './config/corsOptions';
 import connectDB from './config/dbConn';
 import mongoose from 'mongoose';
 
-import rootRouter from './routes/root';
+import userRouter from './routes/users';
+import authRouter from './routes/auth';
 
 const PORT: number | string = process.env.PORT || 3500;
 
+// Establishing Connection to MongoDB
 connectDB();
 
+// Middlewares
 app.use(express.json());
-app.use(express.static('public'));
 app.use(cors(corsOptions));
 
-app.use('/', rootRouter);
-
-app.use('*', (req, res) => {
-    res.status(404);
-    if (req.accepts('json'))
-        res.json({ message: '404 Not Found!' });
-    else
-        res.type('txt').send('404 Not Found!');
-});
+// Routes
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
