@@ -12,6 +12,7 @@ import mongoose from 'mongoose';
 
 import userRouter from './routes/users';
 import authRouter from './routes/auth';
+import otpRouter from './routes/otp';
 
 const PORT: number | string = process.env.PORT || 3500;
 
@@ -25,6 +26,7 @@ app.use(cors(corsOptions));
 // Routes
 app.use('/api/users', userRouter);
 app.use('/api/auth', authRouter);
+app.use('/api/otp', otpRouter);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');

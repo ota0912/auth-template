@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 import jwt from "jsonwebtoken";
-import Joi from "joi";
+import Joi, { boolean } from "joi";
 import passwordComplexity from "joi-password-complexity";
 
 interface UserDocument extends Document {
@@ -8,7 +8,10 @@ interface UserDocument extends Document {
     lastName: string;
     password: string;
     mode: string;
-    contact: string
+    contact: string;
+    otp?: string;
+    otpExpiration?: Date;
+    registered: boolean;
     generateAuthToken: () => string;
 }
 
@@ -18,6 +21,9 @@ const userSchema: Schema<UserDocument> = new mongoose.Schema({
     password: { type: String, required: true },
     mode: { type: String, required: true },
     contact: { type: String, required: true },
+    otp: { type: String, required: false },
+    otpExpiration: { type: Date, required: false },
+    registered: { type: Boolean, required: true },
 });
 
 userSchema.methods.generateAuthToken = function (this: UserDocument): string {
@@ -42,4 +48,4 @@ const validate = (data: any) => {
     return schema.validate(data);
 };
 
-export { User, validate };
+export { User, UserDocument, validate };
