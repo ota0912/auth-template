@@ -24,7 +24,7 @@ router.post("/", async (req: Request, res: Response) => {
         const otp = generateOTP();
         const otpExpiration = moment().add(5, 'minutes').toDate();
         
-        sendOTP(otp, req.body.mode, req.body.contact);
+        await sendOTP(otp, req.body.mode, req.body.contact);
 
         const userObj = {
             ...req.body, 
