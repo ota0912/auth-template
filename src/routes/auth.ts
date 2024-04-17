@@ -10,7 +10,7 @@ router.post("/", async (req: Request, res: Response) => {
         const { error } = validate(req.body);
         if (error)
             return res.status(400).send({ message: error.details[0].message });
-        const user = await User.findOne({ mode: req.body.mode, contact: req.body.contact });
+        const user = await User.findOne({ mode: req.body.mode, contact: req.body.contact, registered: true });
         if (!user)
             return res.status(401).send({ message: "Invalid Contact" });
         const validPassword = await bcrypt.compare(
