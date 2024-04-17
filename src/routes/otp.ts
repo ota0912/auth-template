@@ -8,10 +8,14 @@ router.post("/", async (req: Request, res: Response) => {
     try {
         const user = await User.findOne({ mode: req.body.mode, contact: req.body.contact });
         if (user) {
-            if(user.otp !== req.body.otp)
+            if(user.otp !== req.body.otp){
                 res.status(400).send({ message: "Invalid OTP" });
-            if(moment().isAfter(user.otpExpiration))
+                return;
+            }
+            if(moment().isAfter(user.otpExpiration)){
                 res.status(400).send({ message: "OTP expired" });
+                return;
+            }
             user.otp = undefined;
             user.otpExpiration = undefined;
             user.registered = true;
