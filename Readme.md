@@ -7,27 +7,27 @@ This project provides a template for implementing authentication in Node.js usin
 - `/api/users`: This route handles user-related operations such as registration, updating user information, and deleting users.
     ```json
     {
-        firstName: ,
-        lastName: ,
-        password: ,
-        mode: ,
-        contact: ,
+        "firstName": "",
+        "lastName": "",
+        "password": "",
+        "mode": "",
+        "contact": "",
     }
     ```
 - `/api/otp`: This route is responsible for generating and verifying OTP (One-Time Password) for user authentication.
     ```json
     {
-        mode: ,
-        contact: ,
-        otp: ,
+        "mode": "",
+        "contact": "",
+        "otp": "",
     }
     ```
 - `/api/auth`: This route manages user authentication and token generation.
     ```json
     {
-        password: ,
-        mode: ,
-        contact: ,
+        "password": "",
+        "mode": "",
+        "contact": "",
     }
     ```
 
