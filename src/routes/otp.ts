@@ -16,7 +16,8 @@ router.post("/", async (req: Request, res: Response) => {
             user.otpExpiration = undefined;
             user.registered = true;
             user.save();
-            res.status(201).send({ message: "User Registered Successfully" });
+            const token = user.generateAuthToken();
+            res.status(200).send({ data: token, message: "user registered successfully" });
         }
         else throw "Invalid User Details";
     } catch (error) {
